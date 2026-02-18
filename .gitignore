@@ -1,39 +1,66 @@
+# =========================
 # Dependencies
+# =========================
 node_modules/
 
 # Bun
 .bun/
 bun-cache/
+.bun-cache/
 
-# Build artifacts (do NOT ignore dist for published libs)
+# =========================
+# Build outputs
+# =========================
 dist/
 build/
 out/
 coverage/
+
+# TypeScript
 *.tsbuildinfo
 
-# Env
+# =========================
+# Env / secrets
+# =========================
 .env
 .env.*
 !.env.example
 
+# =========================
 # Logs
-logs
+# =========================
 *.log
+bun-debug.log*
 
-# OS / IDE
+# =========================
+# OS junk
+# =========================
 .DS_Store
 Thumbs.db
+
+# =========================
+# Editor / IDE
+# =========================
 .vscode/
 !.vscode/extensions.json
 .idea/
 *.iml
 
-# Tests
-.playwright/
+# =========================
+# Cache
+# =========================
+.cache/
+.tmp/
+temp/
+tmp/
+
+# =========================
+# Testing
+# =========================
+playwright-report/
 test-results/
 
+# =========================
 # Misc
-.cache/
-tmp/
-temp/
+# =========================
+*.tgz

@@ -6,42 +6,43 @@
     "type": "git",
     "url": "https://github.com/project-init/tommon.git"
   },
+  "license": "MIT",
   "type": "module",
   "exports": {
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.js"
-    },
-    "./*/*": {
-      "types": "./dist/*/*.d.ts",
-      "import": "./dist/*/*.js"
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/index.js"
     }
   },
+  "types": "./src/index.ts",
   "files": [
-    "dist"
+    "dist",
+    "src/**/*.ts",
+    "!src/**/*.test.ts",
+    "!src/**/*.spec.ts"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "format": "sort-package-json && prettier --write .",
+    "build": "tsc && rm -rf dist && bun build ./src/index.ts --outfile ./dist/index.js --target bun --format esm",
+    "format": "prettier --write .",
     "prepublishOnly": "bun run build",
-    "test": "bun test",
-    "typecheck": "tsc --noEmit"
+    "test": "bun test"
   },
   "prettier": {
     "plugins": [
-      "@ianvs/prettier-plugin-sort-imports"
+      "@ianvs/prettier-plugin-sort-imports",
+      "prettier-plugin-packagejson"
     ],
     "singleQuote": true
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "~4.7.1",
-    "@types/bun": "^1.3.9",
+    "@types/bun": "~1.3.9",
     "prettier": "~3.8.1",
     "prettier-plugin-packagejson": "~3.0.0",
     "typescript": "~5.9.3"
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/"
   }
 }
