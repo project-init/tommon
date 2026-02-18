@@ -2,14 +2,11 @@
   "name": "@project-init/tommon",
   "version": "VERSION",
   "description": "Common Typescript Library for interacting with Project Init Modules.",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/project-init/tommon.git"
   },
-  "files": [
-    "dist"
-  ],
+  "type": "module",
   "exports": {
     "./*": {
       "types": "./dist/*.d.ts",
@@ -20,6 +17,9 @@
       "import": "./dist/*/*.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "format": "sort-package-json && prettier --write .",
