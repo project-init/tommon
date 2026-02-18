@@ -17,3 +17,6 @@ jobs:
 
       - name: Unit Test
         run: mise unit-test
+
+      - name: Build
+        run: mise build
