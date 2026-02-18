@@ -6,6 +6,7 @@ node_modules/
 bun-cache/
 
 # Build artifacts (do NOT ignore dist for published libs)
+dist/
 build/
 out/
 coverage/

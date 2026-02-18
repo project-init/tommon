@@ -13,6 +13,12 @@ npm.bun = true
 [tasks.setup]
 run = "bun install"
 
+# Build
+
+[tasks.build]
+depends = ["setup"]
+run = "bun run build"
+
 # Tests
 
 [tasks.test]
@@ -21,8 +27,8 @@ depends = [
 ]
 
 [tasks.unit-test]
-run = "echo TODO"
-#run = "bun run test"
+depends = ["setup"]
+run = "bun run test"
 
 # Linting
 
