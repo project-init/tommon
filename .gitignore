@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Bun
+.bun/
+bun-cache/
+
+# Build artifacts (do NOT ignore dist for published libs)
+build/
+out/
+coverage/
+*.tsbuildinfo
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.iml
+
+# Tests
+.playwright/
+test-results/
+
+# Misc
+.cache/
+tmp/
+temp/

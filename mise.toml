@@ -1,0 +1,30 @@
+[tools]
+
+[env]
+MISE_DISABLE_BACKENDS = "aqua,ubi"
+
+[settings]
+experimental = true
+
+# Tests
+
+[tasks.test]
+depends = [
+    "unit-test"
+]
+
+[tasks.unit-test]
+run = "echo TODO"
+
+# Linting
+
+[tasks.lint]
+run = "echo TODO"
+
+[tasks.format]
+run = "echo TODO"
+
+# Release
+
+[tasks.start-release]
+run = "./scripts/git-tag-release.sh"
