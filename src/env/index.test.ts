@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { Env, isDevelopment, isNonDevelopment } from './env';
+import { Env, isDevelopment, isNonDevelopment } from '.';
 
 describe('Env', () => {
   test('string values match and development detection works', () => {
