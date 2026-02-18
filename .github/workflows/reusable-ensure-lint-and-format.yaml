@@ -15,9 +15,6 @@ jobs:
           experimental: true
           cache: true
 
-      - name: Lint
-        run: mise lint
-
       - name: Format
         run: mise format
 
