@@ -1,2 +1,2 @@
 [install.scopes]
-"@project-init" = { token = "$GITHUB_TOKEN", url = "https://npm.pkg.github.com/" }
+"@project-init" = { token = "$NODE_AUTH_TOKEN", url = "https://npm.pkg.github.com/" }
