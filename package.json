@@ -20,6 +20,10 @@
     "./errors": {
       "types": "./src/errors/index.ts",
       "import": "./dist/errors/index.js"
+    },
+    "./grpc": {
+      "types": "./src/grpc/index.ts",
+      "import": "./dist/grpc/index.js"
     }
   },
   "types": "./src/index.ts",
@@ -30,7 +34,7 @@
     "!src/**/*.spec.ts"
   ],
   "scripts": {
-    "build": "tsc && rm -rf dist && bun build ./src/index.ts ./src/cfg/index.ts ./src/errors/index.ts --outdir ./dist --target bun --format esm --splitting",
+    "build": "tsc && rm -rf dist && bun build ./src/index.ts ./src/cfg/index.ts ./src/errors/index.ts ./src/grpc/index.ts --outdir ./dist --target bun --format esm --splitting",
     "format": "prettier --write .",
     "prepublishOnly": "bun run build",
     "test": "bun test"
@@ -44,6 +48,7 @@
   },
   "devDependencies": {
     "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1",
     "@ianvs/prettier-plugin-sort-imports": "~4.7.1",
     "@types/bun": "~1.3.9",
     "prettier": "~3.8.1",
@@ -51,10 +56,14 @@
     "typescript": "~5.9.3"
   },
   "peerDependencies": {
-    "@connectrpc/connect": "^2.1.1"
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1"
   },
   "peerDependenciesMeta": {
     "@connectrpc/connect": {
+      "optional": true
+    },
+    "@connectrpc/connect-node": {
       "optional": true
     }
   },
