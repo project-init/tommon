@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext", // Without target, TS defaults to ES3, which doesnt support iterating over Set
+    "target": "ESNext",
     "strict": true,
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
