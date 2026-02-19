@@ -13,13 +13,9 @@
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": true,
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["ESNext"],
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
