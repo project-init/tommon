@@ -44,8 +44,8 @@
     "typescript": "~5.9.3"
   },
   "peerDependencies": {
-    "@connectrpc/connect": "~2.1.1",
-    "@connectrpc/connect-node": "~2.1.1"
+    "@connectrpc/connect": "^2.0.0",
+    "@connectrpc/connect-node": "^2.0.0"
   },
   "peerDependenciesMeta": {
     "@connectrpc/connect": {
