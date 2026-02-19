@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { Env, isDevelopment, isNonDevelopment } from '.';
+import { Env, isDevelopment, isNonDevelopment, parseEnv } from '.';
 
 describe('Env', () => {
   test('string values match and development detection works', () => {
@@ -14,5 +14,19 @@ describe('Env', () => {
     expect(isNonDevelopment(Env.Development)).toBe(false);
     expect(isNonDevelopment(Env.Staging)).toBe(true);
     expect(isNonDevelopment(Env.Production)).toBe(true);
+  });
+});
+
+describe('parseEnv', () => {
+  test('returns valid env values', () => {
+    expect(parseEnv('development')).toBe(Env.Development);
+    expect(parseEnv('staging')).toBe(Env.Staging);
+    expect(parseEnv('production')).toBe(Env.Production);
+  });
+
+  test('throws on invalid env values', () => {
+    expect(() => parseEnv('invalid')).toThrow('Invalid environment: "invalid"');
+    expect(() => parseEnv('')).toThrow('Invalid environment');
+    expect(() => parseEnv('PRODUCTION')).toThrow('Invalid environment');
   });
 });
