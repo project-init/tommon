@@ -6,6 +6,17 @@ export const Env = {
 
 export type Env = (typeof Env)[keyof typeof Env];
 
+const validEnvs = new Set<string>(Object.values(Env));
+
+export function parseEnv(value: string): Env {
+  if (!validEnvs.has(value)) {
+    throw new Error(
+      `Invalid environment: "${value}". Must be one of: ${[...validEnvs].join(', ')}`,
+    );
+  }
+  return value as Env;
+}
+
 export function isDevelopment(env: Env): boolean {
   return env === Env.Development;
 }
