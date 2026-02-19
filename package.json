@@ -12,18 +12,6 @@
     ".": {
       "types": "./src/index.ts",
       "import": "./dist/index.js"
-    },
-    "./cfg": {
-      "types": "./src/cfg/index.ts",
-      "import": "./dist/cfg/index.js"
-    },
-    "./errors": {
-      "types": "./src/errors/index.ts",
-      "import": "./dist/errors/index.js"
-    },
-    "./grpc": {
-      "types": "./src/grpc/index.ts",
-      "import": "./dist/grpc/index.js"
     }
   },
   "types": "./src/index.ts",
@@ -34,7 +22,7 @@
     "!src/**/*.spec.ts"
   ],
   "scripts": {
-    "build": "tsc && rm -rf dist && bun build ./src/index.ts ./src/cfg/index.ts ./src/errors/index.ts ./src/grpc/index.ts --outdir ./dist --target bun --format esm --splitting",
+    "build": "tsc && rm -rf dist && bun build ./src/index.ts ./src/*/index.ts --outdir ./dist --target bun --format esm --splitting",
     "format": "prettier --write .",
     "prepublishOnly": "bun run build",
     "test": "bun test"
