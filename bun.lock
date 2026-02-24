@@ -5,7 +5,7 @@
     "": {
       "name": "@project-init/tommon",
       "dependencies": {
-        "pino": "^10.3.1",
+        "pino": "^10.0.0",
       },
       "devDependencies": {
         "@connectrpc/connect": "~2.1.1",
