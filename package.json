@@ -34,6 +34,9 @@
     ],
     "singleQuote": true
   },
+  "dependencies": {
+    "pino": "^10.0.0"
+  },
   "devDependencies": {
     "@connectrpc/connect": "~2.1.1",
     "@connectrpc/connect-node": "~2.1.1",
