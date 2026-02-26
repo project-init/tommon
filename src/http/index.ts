@@ -15,8 +15,7 @@ export function requestLogger(log: Logger) {
   return new Elysia({ name: 'tommon.request-logger' })
     .derive({ as: 'global' }, ({ request }) => {
       const reqId =
-        request.headers.get('x-request-id') ??
-        globalThis.crypto.randomUUID();
+        request.headers.get('x-request-id') ?? globalThis.crypto.randomUUID();
       const start = performance.now();
       const req = pickReqFields(request);
       return {
@@ -26,9 +25,7 @@ export function requestLogger(log: Logger) {
       };
     })
     .onAfterResponse({ as: 'global' }, (ctx) => {
-      const reqLog = (ctx as Record<string, unknown>).log as
-        | Logger
-        | undefined;
+      const reqLog = (ctx as Record<string, unknown>).log as Logger | undefined;
       const reqStart = (ctx as Record<string, unknown>)._reqStart as
         | number
         | undefined;
@@ -38,9 +35,7 @@ export function requestLogger(log: Logger) {
       reqLog.debug({ res: { status }, ms }, 'request');
     })
     .onError({ as: 'global' }, (ctx) => {
-      const reqLog = (ctx as Record<string, unknown>).log as
-        | Logger
-        | undefined;
+      const reqLog = (ctx as Record<string, unknown>).log as Logger | undefined;
       const reqStart = (ctx as Record<string, unknown>)._reqStart as
         | number
         | undefined;
