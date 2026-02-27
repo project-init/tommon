@@ -11,7 +11,7 @@ function pickReqFields(request: Request) {
   };
 }
 
-export function requestLogger(log: Logger) {
+export function elysiaRequestLogger(log: Logger) {
   return new Elysia({ name: 'tommon.request-logger' })
     .derive({ as: 'global' }, ({ request }) => {
       const reqId = request.headers.get('x-request-id') ?? Bun.randomUUIDv7();
