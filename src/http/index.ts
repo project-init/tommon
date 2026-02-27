@@ -34,7 +34,8 @@ export function requestLogger(log: Logger) {
       if (!reqLog || !reqStart) return;
       const ms = Math.round((performance.now() - reqStart) * 100) / 100;
       const err = (ctx as Record<string, unknown>)._reqError;
-      const status = (ctx.set.status as number | undefined) ?? (err ? 500 : 200);
+      const status =
+        (ctx.set.status as number | undefined) ?? (err ? 500 : 200);
       if (err) {
         reqLog.error({ res: { status }, ms, err }, 'request');
       } else {
