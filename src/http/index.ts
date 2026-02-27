@@ -23,6 +23,9 @@ export function requestLogger(log: Logger) {
         log: log.child({ reqId, req }),
       };
     })
+    .onError({ as: 'global' }, (ctx) => {
+      (ctx as Record<string, unknown>)._reqError = ctx.error;
+    })
     .onAfterResponse({ as: 'global' }, (ctx) => {
       const reqLog = (ctx as Record<string, unknown>).log as Logger | undefined;
       const reqStart = (ctx as Record<string, unknown>)._reqStart as
@@ -30,17 +33,12 @@ export function requestLogger(log: Logger) {
         | undefined;
       if (!reqLog || !reqStart) return;
       const ms = Math.round((performance.now() - reqStart) * 100) / 100;
-      const status = (ctx.set.status as number | undefined) ?? 200;
-      reqLog.debug({ res: { status }, ms }, 'request');
-    })
-    .onError({ as: 'global' }, (ctx) => {
-      const reqLog = (ctx as Record<string, unknown>).log as Logger | undefined;
-      const reqStart = (ctx as Record<string, unknown>)._reqStart as
-        | number
-        | undefined;
-      if (!reqLog || !reqStart) return;
-      const ms = Math.round((performance.now() - reqStart) * 100) / 100;
-      const status = (ctx.set.status as number | undefined) ?? 500;
-      reqLog.error({ res: { status }, ms, err: ctx.error }, 'request_error');
+      const err = (ctx as Record<string, unknown>)._reqError;
+      const status = (ctx.set.status as number | undefined) ?? (err ? 500 : 200);
+      if (err) {
+        reqLog.error({ res: { status }, ms, err }, 'request');
+      } else {
+        reqLog.debug({ res: { status }, ms }, 'request');
+      }
     });
 }
