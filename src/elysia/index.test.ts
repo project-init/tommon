@@ -1,12 +1,14 @@
 import { describe, expect, test } from 'bun:test';
 import { Elysia } from 'elysia';
-import type { Logger } from '../logging';
 import { elysiaRequestLogger } from '.';
+import type { Logger } from '../logging';
 
 function createSpyLogger() {
   const calls: { level: string; args: unknown[] }[] = [];
 
-  function makeLogger(sharedCalls: { level: string; args: unknown[] }[]): Logger {
+  function makeLogger(
+    sharedCalls: { level: string; args: unknown[] }[],
+  ): Logger {
     function makeMethod(level: string) {
       return (...args: unknown[]) => {
         sharedCalls.push({ level, args });
