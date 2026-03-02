@@ -58,7 +58,7 @@ describe('elysiaRequestLogger', () => {
       (c) => c.args[0] === 'request' || c.args[1] === 'request',
     );
     expect(requestLogs).toHaveLength(1);
-    expect(requestLogs[0].level).toBe('debug');
+    expect(requestLogs[0]!.level).toBe('debug');
   });
 
   test('logs error request at error level', async () => {
@@ -72,7 +72,7 @@ describe('elysiaRequestLogger', () => {
       (c) => c.args[0] === 'request' || c.args[1] === 'request',
     );
     expect(requestLogs).toHaveLength(1);
-    expect(requestLogs[0].level).toBe('error');
+    expect(requestLogs[0]!.level).toBe('error');
   });
 
   test('does not double log on error', async () => {
