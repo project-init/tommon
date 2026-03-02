@@ -42,19 +42,24 @@
     "@connectrpc/connect-node": "~2.1.1",
     "@ianvs/prettier-plugin-sort-imports": "~4.7.1",
     "@types/bun": "~1.3.9",
+    "elysia": "~1.4.25",
     "prettier": "~3.8.1",
     "prettier-plugin-packagejson": "~3.0.0",
     "typescript": "~5.9.3"
   },
   "peerDependencies": {
     "@connectrpc/connect": "^2.0.0",
-    "@connectrpc/connect-node": "^2.0.0"
+    "@connectrpc/connect-node": "^2.0.0",
+    "elysia": "^1.0.0"
   },
   "peerDependenciesMeta": {
     "@connectrpc/connect": {
       "optional": true
     },
     "@connectrpc/connect-node": {
+      "optional": true
+    },
+    "elysia": {
       "optional": true
     }
   },
