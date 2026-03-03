@@ -21,11 +21,13 @@
         "@connectrpc/connect": "^2.0.0",
         "@connectrpc/connect-node": "^2.0.0",
         "elysia": "^1.0.0",
+        "prom-client": "^15.0.0",
       },
       "optionalPeers": [
         "@connectrpc/connect",
         "@connectrpc/connect-node",
         "elysia",
+        "prom-client",
       ],
     },
   },

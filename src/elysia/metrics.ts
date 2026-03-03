@@ -1,5 +1,10 @@
 import { Elysia } from 'elysia';
-import { Counter, Histogram, collectDefaultMetrics, register } from 'prom-client';
+import {
+  collectDefaultMetrics,
+  Counter,
+  Histogram,
+  register,
+} from 'prom-client';
 
 collectDefaultMetrics();
 
