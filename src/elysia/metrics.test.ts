@@ -70,8 +70,7 @@ describe('httpMetricsPlugin', () => {
       (v) => v.labels.route === '/ok' && v.labels.status_code === '200',
     );
     const notFoundEntry = counter!.values.find(
-      (v) =>
-        v.labels.route === '/not-found' && v.labels.status_code === '404',
+      (v) => v.labels.route === '/not-found' && v.labels.status_code === '404',
     );
     expect(okEntry).toBeDefined();
     expect(notFoundEntry).toBeDefined();
@@ -87,9 +86,7 @@ describe('httpMetricsPlugin', () => {
 
     const metrics = await register.getMetricsAsJSON();
     const counter = metrics.find((m) => m.name === 'http_requests_total');
-    const postEntry = counter!.values.find(
-      (v) => v.labels.method === 'POST',
-    );
+    const postEntry = counter!.values.find((v) => v.labels.method === 'POST');
     expect(postEntry).toBeDefined();
     expect(postEntry!.value).toBe(1);
   });

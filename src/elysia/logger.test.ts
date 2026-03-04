@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { Elysia } from 'elysia';
-import { elysiaRequestLogger } from './logger';
 import type { Logger } from '../logging';
+import { elysiaRequestLogger } from './logger';
 
 function createSpyLogger() {
   const calls: { level: string; args: unknown[] }[] = [];
