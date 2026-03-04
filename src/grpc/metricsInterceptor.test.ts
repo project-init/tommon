@@ -89,7 +89,7 @@ describe('grpcMetricsInterceptor', () => {
       (value) =>
         value.labels.grpc_service === 'example.v1.ExampleService' &&
         value.labels.grpc_method === 'GetExample' &&
-        value.labels.grpc_status === 'unknown',
+        value.labels.grpc_status === 'Unknown',
     );
 
     expect(entry).toBeDefined();
