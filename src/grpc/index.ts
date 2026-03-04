@@ -8,7 +8,7 @@ import { isDevelopment, type Env } from '../env';
 export function createGrpcTransportForEnv(
   host: string,
   env: Env,
-  options?: GrpcTransportOptions,
+  options?: Omit<GrpcTransportOptions, 'baseUrl'>,
 ): Transport {
   const baseUrl = isDevelopment(env) ? `http://${host}` : `https://${host}`;
 
