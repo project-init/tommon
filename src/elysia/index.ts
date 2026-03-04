@@ -1,6 +1,8 @@
 import { Elysia } from 'elysia';
 import type { Logger } from '../logging';
 
+export { httpMetricsPlugin, metricsPlugin } from './metrics';
+
 function pickReqFields(request: Request) {
   const url = new URL(request.url);
   return {
