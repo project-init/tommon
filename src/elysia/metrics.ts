@@ -23,11 +23,11 @@ const httpRequestDuration = new Histogram({
 });
 
 export const httpMetricsPlugin = new Elysia({ name: 'http-metrics' })
-  .onRequest(({ store }) => {
-    (store as Record<string, unknown>).startTime = performance.now();
-  })
-  .onAfterResponse(({ request, set, store, path }) => {
-    const startTime = (store as Record<string, unknown>).startTime as number;
+  .derive({ as: 'global' }, () => ({
+    _metricsStart: performance.now(),
+  }))
+  .onAfterResponse({ as: 'global' }, ({ request, set, path, ...ctx }) => {
+    const startTime = (ctx as Record<string, unknown>)._metricsStart as number;
     const duration = (performance.now() - startTime) / 1000;
     const method = request.method;
     const statusCode = String(set.status || 200);

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import { Elysia } from 'elysia';
-import { elysiaRequestLogger } from '.';
+import { elysiaRequestLogger } from './logger';
 import type { Logger } from '../logging';
 
 function createSpyLogger() {
