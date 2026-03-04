@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, test } from 'bun:test';
 import { Code, ConnectError } from '@connectrpc/connect';
+import { afterEach, describe, expect, test } from 'bun:test';
 import { register } from 'prom-client';
 import { grpcMetricsInterceptor } from './metricsInterceptor';
 
