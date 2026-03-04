@@ -1,5 +1,6 @@
 import type { Interceptor } from '@connectrpc/connect';
 import { ConnectError } from '@connectrpc/connect';
+import { Code } from '@connectrpc/connect';
 import { Counter, Histogram } from 'prom-client';
 
 // Tracks latency for each outbound gRPC call. The timer starts before the
@@ -8,6 +9,7 @@ const grpcDuration = new Histogram({
   name: 'grpc_client_request_duration_seconds',
   help: 'Duration of outbound gRPC requests in seconds',
   labelNames: ['grpc_service', 'grpc_method', 'grpc_status'],
+  buckets: [0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5],
 });
 
 // Counts total outbound gRPC calls, split by service/method and final status.
@@ -43,7 +45,7 @@ export const grpcMetricsInterceptor: Interceptor = (next) => async (req) => {
     // Convert ConnectError codes into a stable status label. For non-Connect
     // errors, tag as unknown so failures are still observable.
     const status =
-      err instanceof ConnectError ? err.code.toString() : 'unknown';
+      err instanceof ConnectError ? Code[err.code] : 'unknown';
     end({ grpc_status: status });
     grpcTotal.inc({
       grpc_service: service,
