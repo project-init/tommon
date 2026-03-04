@@ -41,7 +41,11 @@ export const httpMetricsPlugin = new Elysia({ name: 'http-metrics' })
     const method = request.method;
     const statusCode = String(set.status || 200);
 
-    httpRequestsTotal.inc({ method, route: normalizePath(path), status_code: statusCode });
+    httpRequestsTotal.inc({
+      method,
+      route: normalizePath(path),
+      status_code: statusCode,
+    });
     httpRequestDuration.observe(
       { method, route: normalizePath(path), status_code: statusCode },
       duration,
