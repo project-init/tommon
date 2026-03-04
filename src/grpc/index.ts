@@ -4,6 +4,7 @@ import {
   type GrpcTransportOptions,
 } from '@connectrpc/connect-node';
 import { isDevelopment, type Env } from '../env';
+import { grpcMetricsInterceptor } from './metricsInterceptor';
 
 export function createGrpcTransportForEnv(
   host: string,
@@ -14,3 +15,5 @@ export function createGrpcTransportForEnv(
 
   return createGrpcTransport({ baseUrl, ...options });
 }
+
+export { grpcMetricsInterceptor };
