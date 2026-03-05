@@ -8,6 +8,15 @@ import {
 
 collectDefaultMetrics();
 
+/** Replace UUIDs and numeric IDs in path segments with `:id` to prevent cardinality explosion. */
+export const normalizePath = (path: string): string =>
+  path
+    .replace(
+      /\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?=\/|$)/gi,
+      '/:id',
+    )
+    .replace(/\/\d+(?=\/|$)/g, '/:id');
+
 const httpRequestsTotal = new Counter({
   name: 'http_requests_total',
   help: 'Total number of HTTP requests',
@@ -32,9 +41,13 @@ export const httpMetricsPlugin = new Elysia({ name: 'http-metrics' })
     const method = request.method;
     const statusCode = String(set.status || 200);
 
-    httpRequestsTotal.inc({ method, route: path, status_code: statusCode });
+    httpRequestsTotal.inc({
+      method,
+      route: normalizePath(path),
+      status_code: statusCode,
+    });
     httpRequestDuration.observe(
-      { method, route: path, status_code: statusCode },
+      { method, route: normalizePath(path), status_code: statusCode },
       duration,
     );
   });
