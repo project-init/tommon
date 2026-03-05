@@ -8,14 +8,14 @@ import {
 
 collectDefaultMetrics();
 
-/** Replace UUIDs and numeric IDs in paths with `:id` to prevent cardinality explosion. */
-const normalizePath = (path: string): string =>
+/** Replace UUIDs and numeric IDs in path segments with `:id` to prevent cardinality explosion. */
+export const normalizePath = (path: string): string =>
   path
     .replace(
-      /\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi,
+      /\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?=\/|$)/gi,
       '/:id',
     )
-    .replace(/\/\d+/g, '/:id');
+    .replace(/\/\d+(?=\/|$)/g, '/:id');
 
 const httpRequestsTotal = new Counter({
   name: 'http_requests_total',

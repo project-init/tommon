@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, test } from 'bun:test';
 import { Elysia } from 'elysia';
 import { register } from 'prom-client';
-import { httpMetricsPlugin, metricsPlugin } from './metrics';
+import { httpMetricsPlugin, metricsPlugin, normalizePath } from './metrics';
 
 function tick() {
   return new Promise((resolve) => setTimeout(resolve, 10));
@@ -105,6 +105,55 @@ describe('httpMetricsPlugin', () => {
       (v) => v.labels.route === '/ok' && v.labels.status_code === '200',
     );
     expect(entry!.value).toBe(3);
+  });
+});
+
+describe('normalizePath', () => {
+  test('replaces UUIDs with :id', () => {
+    expect(normalizePath('/users/550e8400-e29b-41d4-a716-446655440000')).toBe(
+      '/users/:id',
+    );
+  });
+
+  test('replaces multiple UUIDs', () => {
+    expect(
+      normalizePath(
+        '/orgs/550e8400-e29b-41d4-a716-446655440000/users/00000000-0000-0000-0000-000000000001',
+      ),
+    ).toBe('/orgs/:id/users/:id');
+  });
+
+  test('replaces numeric IDs', () => {
+    expect(normalizePath('/users/123')).toBe('/users/:id');
+    expect(normalizePath('/orders/456/items/789')).toBe(
+      '/orders/:id/items/:id',
+    );
+  });
+
+  test('does not replace partial numeric segments', () => {
+    expect(normalizePath('/v1/login')).toBe('/v1/login');
+    expect(normalizePath('/ui/v2/home')).toBe('/ui/v2/home');
+  });
+
+  test('does not replace non-ID alphanumeric segments', () => {
+    expect(normalizePath('/users/123abc')).toBe('/users/123abc');
+  });
+
+  test('leaves static paths unchanged', () => {
+    expect(normalizePath('/healthcheck')).toBe('/healthcheck');
+    expect(normalizePath('/v1/auth/saml/login')).toBe('/v1/auth/saml/login');
+    expect(normalizePath('/users')).toBe('/users');
+    expect(normalizePath('/metrics')).toBe('/metrics');
+  });
+
+  test('handles UUID mid-path', () => {
+    expect(
+      normalizePath('/users/00000000-0000-0000-0000-000000000001/settings'),
+    ).toBe('/users/:id/settings');
+  });
+
+  test('handles numeric ID mid-path', () => {
+    expect(normalizePath('/users/123/settings')).toBe('/users/:id/settings');
   });
 });
 
