@@ -1,5 +1,7 @@
 [tools]
 bun = "1.3.9"
+node = "25.7.0"
+prettier = "3.8.1"
 
 # Internal
 "go:github.com/project-init/devex/cmd/release" = "latest"
@@ -36,8 +38,28 @@ run = "bun run test"
 # Linting
 
 [tasks.format]
+depends = [
+    "format-prettier",
+    "format-bun",
+]
+
+[tasks.format-prettier-sync]
+run = "sh ./scripts/sync-prettier-config.sh"
+
+[tasks.format-prettier]
+depends = ["format-prettier-sync"]
+run = "prettier --config ./prettier.config.json --ignore-path ./.prettierignore --write \"**/*.{md,yml,yaml}\""
+
+[tasks.format-bun]
 depends = ["setup"]
 run = "bun run format"
+
+[tasks.lint]
+depends = ["lint-prettier"]
+
+[tasks.lint-prettier]
+depends = ["format-prettier-sync"]
+run = "prettier --config ./prettier.config.json --ignore-path ./.prettierignore --check \"**/*.{md,yml,yaml}\""
 
 # Dependencies
 
