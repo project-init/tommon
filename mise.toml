@@ -39,18 +39,17 @@ run = "bun run test"
 depends = ["format-*"]
 
 [tasks.format-prettier-sync]
-depends = ["setup"]
 run = "sh ./scripts/sync-prettier-config.sh"
 
 [tasks.format-prettier]
-depends = ["format-prettier-sync"]
+depends = ["setup", "format-prettier-sync"]
 run = "bun run format"
 
 [tasks.lint]
 depends = ["lint-*"]
 
 [tasks.lint-prettier]
-depends = ["format-prettier-sync"]
+depends = ["setup", "format-prettier-sync"]
 run = "bun run lint"
 
 # Dependencies
