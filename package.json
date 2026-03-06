@@ -24,6 +24,7 @@
   "scripts": {
     "build": "tsc && rm -rf dist && bun build ./src/index.ts --outfile ./dist/index.js --target bun --format esm",
     "format": "prettier --write .",
+    "lint": "prettier --check .",
     "prepublishOnly": "bun run build",
     "test": "bun test"
   },
