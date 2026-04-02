@@ -2,7 +2,8 @@
 bun = "1.3.9"
 
 # Internal
-"go:github.com/project-init/devex/cmd/release" = "latest"
+go = "1.26.1"
+"go:github.com/project-init/devex/cmd/sre" = "v0.12.0"
 
 [env]
 MISE_DISABLE_BACKENDS = "aqua,ubi"
@@ -57,3 +58,8 @@ run = "bun run lint"
 [tasks.update-dependencies]
 run = "bun update"
 depends_post = ["setup"]
+
+# Release
+
+[tasks.release]
+run = "sre release"
